@@ -1,0 +1,21 @@
+.item-container{
+  background-color: rgba(245, 245, 245, 0.918);
+  border-radius: 30px;
+}
+
+.task-heading{
+  font-weight: 500;
+  font-size: 27px;
+}
+
+.task-notes{
+  border-radius: 0px 0px 10px 10px; 
+  background-color: rgba(0, 0, 0, 0.041);
+
+  text-transform: uppercase;
+  
+}
+
+.cross{
+  background-color: rgba(211, 43, 43, 0.404);
+}
