@@ -4,8 +4,6 @@ import { BsFileExcel} from '../../node_modules/react-icons/bs'
 
 class ListTask extends Component {
   render() {
-    console.log(this.props.taskList);
-
     return (
       <>
         {this.props.taskList === null || this.props.taskList === undefined || this.props.taskList.length === 0

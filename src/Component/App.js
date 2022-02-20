@@ -40,7 +40,7 @@ class App extends Component {
   }
 
   addTask(task) {
-    let tempTaskList =  this.getFromLocalStorage();
+    let tempTaskList =  this.state.taskList;
 
     task["taskId"] = this.state.lastCounter;
 
@@ -55,29 +55,50 @@ class App extends Component {
   }
 
   deleteTask(task){
-    let tempTaskList = this.getFromLocalStorage();
+    let tempTaskList = this.state.taskList;
 
-    tempTaskList.pop(task.taskId);
+    let filteredTempTaskList = tempTaskList.filter((tempTask)=>{
+      return tempTask.taskId !== task.taskId; 
+    })
 
     this.setState({
-      taskList : tempTaskList
+      taskList : filteredTempTaskList
     });
 
-    this.updateLocalStorage(tempTaskList);
+    this.updateLocalStorage(filteredTempTaskList);
 
   }
-
+  
   componentDidMount() {
 
+    let tempCounter = 0;
     let tempTaskList = localStorage.getItem("taskStorage") === null || localStorage.getItem("taskStorage") === 'null'
     ? localStorage.setItem("taskStorage",null)
     : JSON.parse(localStorage.getItem("taskStorage"));
 
+    tempTaskList.map((tempTask)=> {
+      tempTask.taskId = tempCounter;
+      tempCounter+=1;
+      
+    });
+
     this.setState({
-      taskList: tempTaskList
+      taskList: tempTaskList,
+      lastCounter: tempCounter
     });
 
   }
+  // componentDidMount() {
+
+  //   let tempTaskList = localStorage.getItem("taskStorage") === null || localStorage.getItem("taskStorage") === 'null'
+  //   ? localStorage.setItem("taskStorage",null)
+  //   : JSON.parse(localStorage.getItem("taskStorage"));
+
+  //   this.setState({
+  //     taskList: tempTaskList
+  //   });
+
+  // }
 
 
 
