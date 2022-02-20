@@ -1,7 +1,16 @@
 /** Basic Page CSS **/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
 body{
   font-weight: 200;
   background-color: #377bb7 !important;
+
+  min-width: 400px;
 }
 
 header a,
@@ -23,3 +32,10 @@ footer{
   position: fixed;
   bottom: 0;
 }
+
+
+/*  xs  <  576px
+    sm  >= 576px
+    md  >= 768px
+    lg  >= 992px
+    xl  >= 1200px */

@@ -3,7 +3,7 @@ import { Component } from "react";
 class SearchTask extends Component{
     render(){
        return ( <>
-        <div> SearchTask</div>
+        {/* <div> SearchTask</div> */}
         </>
        );
     };

@@ -85,6 +85,7 @@ class App extends Component {
     let taskList = (this.state.taskList);
     return (
       <>
+      <div className="mx-5">
       {/* <AddTask /> */}
         <AddTask 
           addTask={this.addTask} 
@@ -96,6 +97,7 @@ class App extends Component {
         {/* <ListTask /> */}
         <ListTask taskList={taskList}
           deleteTask = {this.deleteTask} />
+          </div>
       </>
     );
   }
