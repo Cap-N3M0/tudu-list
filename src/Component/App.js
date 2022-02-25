@@ -76,11 +76,15 @@ class App extends Component {
     ? localStorage.setItem("taskStorage",null)
     : JSON.parse(localStorage.getItem("taskStorage"));
 
-    tempTaskList.map((tempTask)=> {
+    if(tempTaskList!=null){
+      tempTaskList.map((tempTask)=> {
       tempTask.taskId = tempCounter;
       tempCounter+=1;
+      return 0;
+      });  
       
-    });
+    }
+    
 
     this.setState({
       taskList: tempTaskList,
