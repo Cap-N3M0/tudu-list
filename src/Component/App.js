@@ -12,14 +12,19 @@ class App extends Component {
     this.state = {
       taskList : [],
       displayForm: true,
-      lastCounter: 0
+      lastCounter: 1,
+      searchText : ""
     };
 
     this.getFromLocalStorage = this.getFromLocalStorage.bind(this);
     this.updateLocalStorage = this.updateLocalStorage.bind(this);
+    //AddTask.js
     this.addTask = this.addTask.bind(this);
     this.deleteTask = this.deleteTask.bind(this);
     this.toggleForm = this.toggleForm.bind(this);
+    //SearchTask.js
+    this.handleSearch = this.handleSearch.bind(this);
+
 
   }
 
@@ -49,6 +54,7 @@ class App extends Component {
     this.setState({
       taskList: tempTaskList,
       lastCounter: this.state.lastCounter + 1,
+      searchText: ""
     });
 
     this.updateLocalStorage(tempTaskList);
@@ -68,13 +74,23 @@ class App extends Component {
     this.updateLocalStorage(filteredTempTaskList);
 
   }
+
+  handleSearch(searchText){
+
+    this.setState({
+      searchText : searchText
+    })
+  }
   
   componentDidMount() {
 
-    let tempCounter = 0;
-    let tempTaskList = localStorage.getItem("taskStorage") === null || localStorage.getItem("taskStorage") === 'null'
+    let tempCounter = this.state.lastCounter;
+    
+    localStorage.getItem("taskStorage") === null || localStorage.getItem("taskStorage") === 'null'
     ? localStorage.setItem("taskStorage",null)
     : JSON.parse(localStorage.getItem("taskStorage"));
+
+    let tempTaskList = this.getFromLocalStorage();
 
     if(tempTaskList!=null){
       tempTaskList.map((tempTask)=> {
@@ -107,7 +123,15 @@ class App extends Component {
 
 
   render() {
+    let searchText = this.state.searchText;
     let taskList = (this.state.taskList);
+    let filteredTaskList = taskList.filter((task)=>{
+      if(task.taskHeading.includes(searchText) || task.taskNotes.includes(searchText) || task.taskDate.includes(searchText))
+      return task;
+      return null;
+    })
+
+
     return (
       <>
       <div className="mx-5">
@@ -117,10 +141,12 @@ class App extends Component {
           toggleForm = {this.toggleForm} 
           displayForm = {this.state.displayForm}/>
         {/* <SearchTask /> */}
-        <SearchTask />
+        <SearchTask 
+          searchText = {searchText}
+          handleSearch = {this.handleSearch}/>
 
         {/* <ListTask /> */}
-        <ListTask taskList={taskList}
+        <ListTask taskList={filteredTaskList}
           deleteTask = {this.deleteTask} />
           </div>
       </>
