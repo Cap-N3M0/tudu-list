@@ -1,5 +1,5 @@
 import { Component } from "react";
-//import Draggable from "react-draggable";
+import DraggableCore from "react-draggable";
 import { BsFileExcel} from '../../node_modules/react-icons/bs'
 
 class ListTask extends Component {
@@ -12,7 +12,7 @@ class ListTask extends Component {
             </div>
           : this.props.taskList.map((task) => {
               return (
-                // <Draggable>
+                 <DraggableCore axis = {'y'}>
                     <div className = "card d-flex flex-column my-3 px-3" key = {task.taskId}>
                     <div className="d-flex fle-row justify-content-between align-items-center">
                       <h6 className="my-2">{task.taskHeading}</h6>
@@ -22,7 +22,7 @@ class ListTask extends Component {
                     <p>{task.taskNotes}</p>
                     <small className="d-flex align-self-end">{task.taskDate}</small>
                     </div>  
-                // </Draggable>
+                </DraggableCore>
                 // <div
                 //   className="item-container d-flex flex-column mx-5 mt-3 px-2 py-2 "
                 //   key={task.taskId}
